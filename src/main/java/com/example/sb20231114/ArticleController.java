@@ -17,9 +17,11 @@ public class ArticleController {
 
     @GetMapping("/article/doWrite")
     @ResponseBody
-    String doWrite(String title ,String body){
+    Article doWrite(String title ,String body){
 
-        return "게시물이 작성되었습니다.";
+        Article article = new Article(1, title , body);
+
+        return article;
     }
 }
 

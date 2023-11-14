@@ -260,6 +260,7 @@ public class HomeController {
     @GetMapping("/calc22")
     @ResponseBody
     int showCalc22(){
+
         num++;
         return num;
 

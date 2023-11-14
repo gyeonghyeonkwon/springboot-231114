@@ -33,8 +33,9 @@ public class ArticleController {
                 article
         );
 
-
-
+        String resultCode = rs.getResultCode();
+        String msg = rs.getMsg();
+        Article _article = rs.getData();
 
         return rs;
     }
@@ -56,7 +57,7 @@ public class ArticleController {
 class RsData {
     private String resultCode;
     private String msg;
-    private Object data;
+    private Article data;
 }
 @AllArgsConstructor
 @Getter

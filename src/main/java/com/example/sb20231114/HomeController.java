@@ -256,7 +256,14 @@ public class HomeController {
 
         return "calc21"; //calc21 .html 파일 을 보여준다.
     }
+    int num =0;
+    @GetMapping("/calc22")
+    @ResponseBody
+    int showCalc22(){
+        num++;
+        return num;
 
+    }
 }
 
 @AllArgsConstructor

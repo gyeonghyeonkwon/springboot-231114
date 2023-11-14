@@ -3,6 +3,7 @@ package com.example.sb20231114;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -238,6 +239,23 @@ public class HomeController {
         return html;
     }
 
+    @GetMapping("/calc20")
+    //@ResponseBody
+    String showCalc20(){
+
+
+            return "calc20"; //calc20 .html 파일 을 보여준다.
+    }
+
+    @GetMapping("/calc21")
+        //@ResponseBody
+    String showCalc21(Model model){
+
+        model.addAttribute("v1" , "안녕");
+        model.addAttribute("v2" , "하세요");
+
+        return "calc21"; //calc21 .html 파일 을 보여준다.
+    }
 
 }
 

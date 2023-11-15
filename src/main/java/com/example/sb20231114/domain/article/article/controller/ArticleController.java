@@ -1,41 +1,40 @@
-package com.example.sb20231114;
+package com.example.sb20231114.domain.article.article.controller;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.example.sb20231114.domain.article.article.entity.Article;
+import com.example.sb20231114.domain.article.article.service.ArticleService;
+import com.example.sb20231114.global.RsData.RsData;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class ArticleController {
-    private List<Article> articles = new ArrayList<>();
-
+    private  final ArticleService articleService;
 
     @GetMapping("/article/write")
     String showWrite() {
         return "article/write";
     }
 
-    @GetMapping("/article/doWrite")
+    @PostMapping ("/article/write")
     @ResponseBody
-    RsData doWrite(
+    RsData write(
             String title,
             String body
     ) {
-        Article article = new Article(articles.size() +1, title, body);
 
-        articles.add(article);
+       Article article =  articleService.write (title,body);
 
         RsData<Article> rs = new RsData<Article> ("S-1",
                 "%d번 게시물이 작성되었습니다.".formatted(article.getId()),
                 article
         );
 
-        String resultCode = rs.getResultCode();
-        String msg = rs.getMsg();
-        Article _article = rs.getData();
 
         return rs;
     }
@@ -43,26 +42,16 @@ public class ArticleController {
     @GetMapping("/article/getLastArticle")
     @ResponseBody
     Article getLastArticle() {
-        return articles.getLast();
+        return articleService.findLastArticle();
     }
 
     @GetMapping("/article/getArticles")
     @ResponseBody
     List<Article> getArticles() {
-        return articles;
+        return articleService.finAll();
     }
 }
-@AllArgsConstructor
-@Getter
-class RsData <T>{
-    private String resultCode;
-    private String msg;
-    private T data;
-}
-@AllArgsConstructor
-@Getter
-class Article {
-    private long id;
-    private String title;
-    private String body;
-}
+
+
+
+
